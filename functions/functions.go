@@ -4,6 +4,10 @@ import (
 	"fmt"
 )
 
+type Rectange struct {
+	width, height float64
+}
+
 func helloWorld() {
 	fmt.Println("Hello World")
 }
@@ -47,12 +51,19 @@ func sumVariadic(nums ...int) int { // Variadic function
 	return total
 }
 
-func intSeq() func() int { // Anonymous Function / Closure
+func intSeq() func() int {
 	i := 0
+
+	// Closure Creation
 	return func() int {
 		i++
 		return i
 	}
+}
+
+/* Function with struct type receiver */
+func (rect Rectange) area() float64 {
+	return rect.width * rect.height
 }
 
 func main() {
@@ -75,7 +86,32 @@ func main() {
 
 	fmt.Printf("sum of nums: %v\n\n", sumV)
 
-	nextInt := intSeq()
+	nextInt := intSeq() // Closure used
 	fmt.Println(nextInt())
 	fmt.Println(nextInt())
+	fmt.Println()
+
+	rectObj := Rectange{width: 3.4, height: 2.5}
+	fmt.Println("Area of the rectangle:", rectObj.area())
+
+	/* Anonymous Function */
+	add := func(a int, b int) int {
+		return a + b
+	}
+
+	fmt.Println("3+5=", add(3, 5))
+
+	/* Anonymous Function with closure */
+	seqCounter := func() func() int {
+		cntr := 0
+		return func() int {
+			cntr++
+			return cntr
+		}
+	}
+
+	s := seqCounter()
+	fmt.Println(s())
+	fmt.Println(s())
+
 }

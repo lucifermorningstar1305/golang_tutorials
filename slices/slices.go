@@ -52,4 +52,12 @@ func main() {
 	fmt.Printf("length of numbersCopy=%v\n", len(numbersCopy))
 	fmt.Printf("capacity of numbersCopy=%v\n", cap(numbersCopy))
 
+	/* Multi-dimensional slice */
+	multi_dim := [][]int{
+		{1, 2, 3, 4},
+		{5, 6, 7, 8},
+	}
+
+	fmt.Println(multi_dim)
+
 }
